@@ -12,7 +12,7 @@ This guide explains how to set up AWS OIDC authentication for GitHub Actions, el
 ## 📋 Prerequisites
 
 - AWS Account with admin access
-- GitHub repository: `Jekyll-intellect-prro`
+- GitHub repository: `jekyll-aws-template.git`
 - AWS CLI installed (for setup)
 
 ## 🚀 Setup Steps
@@ -40,7 +40,7 @@ Edit `github-trust-policy.json` and replace:
 Example:
 ```json
 "Federated": "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com"
-"token.actions.githubusercontent.com:sub": "repo:Michaelcode2/Jekyll-intellect-prro:*"
+"token.actions.githubusercontent.com:sub": "repo:Michaelcode2/REPONAME:*"
 ```
 
 ### 3. Update Permissions Policy
@@ -51,8 +51,8 @@ Edit `github-permissions-policy.json` and replace:
 
 Example:
 ```json
-"arn:aws:s3:::intellect-prro-dev"
-"arn:aws:s3:::intellect-prro-prod"
+"arn:aws:s3:::s3bucketname-dev"
+"arn:aws:s3:::s3bucketname-prod"
 ```
 
 ### 4. Create IAM Role
@@ -105,8 +105,8 @@ Add these under the **Variables** tab:
 
 | Variable Name | Value | Description |
 |--------------|-------|-------------|
-| `S3_BUCKET_DEV` | `intellect-prro-dev` | Development S3 bucket name |
-| `S3_BUCKET_PROD` | `intellect-prro-prod` | Production S3 bucket name |
+| `S3_BUCKET_DEV` | `s3bucketname-dev` | Development S3 bucket name |
+| `S3_BUCKET_PROD` | `s3bucketname-prod` | Production S3 bucket name |
 | `CLOUDFRONT_DISTRIBUTION_ID_DEV` | `E1234EXAMPLE` | Dev CloudFront distribution ID |
 | `CLOUDFRONT_DISTRIBUTION_ID_PROD` | `E5678EXAMPLE` | Prod CloudFront distribution ID |
 
