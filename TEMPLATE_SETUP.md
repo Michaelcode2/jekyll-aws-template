@@ -2,6 +2,17 @@
 
 This is a Jekyll template configured for AWS S3 deployment with CloudFront CDN and GitHub Actions CI/CD.
 
+## 🤖 AI-Friendly Template
+
+This template is optimized for use with AI coding assistants like **Cursor** and **Antigravity**:
+- Comprehensive documentation
+- Clear, consistent code structure
+- Inline comments for AI context
+- Example patterns throughout
+- `.cursorrules` file for Cursor AI
+
+**Tip**: Use AI assistants to speed up customization, content generation, and feature additions!
+
 ## 🚀 Quick Start
 
 ### 1. Clone This Template

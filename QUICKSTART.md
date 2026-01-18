@@ -2,6 +2,8 @@
 
 Get your Jekyll site deployed to AWS in 30 minutes!
 
+**🤖 Pro Tip**: This template works great with AI coding assistants like Cursor and Aider. Use them to speed up customization and content generation!
+
 ## 📋 Prerequisites
 
 - Ruby 3.0+ installed

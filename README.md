@@ -13,6 +13,31 @@ A professional Jekyll static site template configured for AWS S3 deployment with
 - **SEO Optimized** — Built-in SEO tags and sitemap
 - **Product Showcase** — Ready-to-use product/service pages
 - **Contact Forms Ready** — Template pages for customer engagement
+- **AI-Friendly** — Optimized for AI coding assistants (Cursor, Aider, etc.)
+
+## 🤖 AI Tool Integration
+
+This template is specifically designed to work seamlessly with AI coding assistants:
+
+### Cursor AI
+- **Comprehensive Documentation**: 12+ markdown guides provide context for AI understanding
+- **Clear Structure**: Well-organized file structure for easy navigation
+- **Inline Comments**: Code includes helpful comments for AI comprehension
+- **Example Content**: Sample files demonstrate patterns and best practices
+- **.cursorrules**: Includes project-specific rules for Cursor AI
+
+### Aider and Other AI Tools
+- **Consistent Naming**: Predictable file and variable naming conventions
+- **Modular Architecture**: Components separated for targeted modifications
+- **Documentation-First**: Every feature is documented with examples
+- **Template Patterns**: Reusable patterns make it easy for AI to extend functionality
+
+### AI-Assisted Development Benefits
+- 🚀 **Faster Customization**: AI can quickly understand and modify components
+- 📝 **Content Generation**: Use AI to generate page content following existing patterns
+- 🎨 **Style Modifications**: AI can suggest and implement design changes
+- 🐛 **Debugging Help**: Comprehensive structure helps AI identify and fix issues
+- 📦 **Feature Addition**: Well-documented patterns make it easy to add new features
 
 ## 🚀 Quick Start
 

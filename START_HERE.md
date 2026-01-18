@@ -6,6 +6,8 @@ Welcome to the Jekyll AWS Deployment Template!
 
 This is a **production-ready Jekyll template** configured for deployment to AWS S3 with CloudFront CDN and automated GitHub Actions CI/CD.
 
+**🤖 AI-Friendly**: Optimized for AI coding assistants like Cursor and Aider with comprehensive documentation and clear structure.
+
 Perfect for:
 - Business websites
 - Product landing pages
