@@ -1,0 +1,166 @@
+---
+layout: page
+title: "Підтримка"
+subtitle: "Технічна допомога та ресурси для клієнтів"
+description: "Центр підтримки Інтелект Технолоджіс — технічна допомога, документація, FAQ, контакти служби підтримки."
+---
+
+<p class="lead">
+  Наша команда технічної підтримки завжди готова допомогти вам з будь-якими питаннями
+  щодо налаштування, використання та обслуговування продуктів Інтелект Технолоджіс.
+</p>
+
+<div class="support-grid">
+  <div class="support-card">
+    <div class="support-icon">
+      {% include icon.html name="phone" size=32 %}
+    </div>
+    <h3>Телефонна підтримка</h3>
+    <p>Цілодобова технічна підтримка для всіх клієнтів. Швидке вирішення проблем.</p>
+    <a href="tel:{{ site.company.phone | remove: ' ' }}" class="btn btn-primary">Зателефонувати</a>
+  </div>
+
+  <div class="support-card">
+    <div class="support-icon">
+      {% include icon.html name="message-circle" size=32 %}
+    </div>
+    <h3>Онлайн-чат</h3>
+    <p>Миттєві відповіді на ваші питання через онлайн-чат на сайті або в Telegram.</p>
+    <a href="{{ site.social.telegram }}" class="btn btn-outline" target="_blank">Написати в Telegram</a>
+  </div>
+
+  <div class="support-card">
+    <div class="support-icon">
+      {% include icon.html name="mail" size=32 %}
+    </div>
+    <h3>Email підтримка</h3>
+    <p>Надішліть детальний опис проблеми — відповімо протягом 2 годин у робочий час.</p>
+    <a href="mailto:support@intellect-prro.ua" class="btn btn-outline">Написати листа</a>
+  </div>
+
+  <div class="support-card">
+    <div class="support-icon">
+      {% include icon.html name="book" size=32 %}
+    </div>
+    <h3>Документація</h3>
+    <p>Інструкції користувача, посібники з налаштування та інтеграції для всіх продуктів.</p>
+    <a href="#documentation" class="btn btn-outline">Переглянути</a>
+  </div>
+
+  <div class="support-card">
+    <div class="support-icon">
+      {% include icon.html name="graduation-cap" size=32 %}
+    </div>
+    <h3>Навчальні матеріали</h3>
+    <p>Відео-уроки, вебінари та покрокові інструкції для швидкого старту.</p>
+    <a href="#tutorials" class="btn btn-outline">Дивитись</a>
+  </div>
+
+  <div class="support-card">
+    <div class="support-icon">
+      {% include icon.html name="tool" size=32 %}
+    </div>
+    <h3>Віддалена допомога</h3>
+    <p>Підключення до вашого пристрою для діагностики та вирішення складних проблем.</p>
+    <a href="/contact/" class="btn btn-outline">Замовити</a>
+  </div>
+</div>
+
+<h2 id="faq">Часті питання</h2>
+
+<div class="faq-list">
+  <details class="faq-item">
+    <summary>Як зареєструвати ПРРО в ДПС?</summary>
+    <p>
+      Для реєстрації ПРРО в ДПС необхідно мати електронний цифровий підпис (КЕП),
+      зареєструватися в електронному кабінеті платника та подати заяву на реєстрацію
+      РРО. Детальну інструкцію з усіма кроками ви знайдете в документації до продукту
+      або зверніться до нашої підтримки.
+    </p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Що робити, якщо немає інтернету?</summary>
+    <p>
+      ПРРО може працювати в офлайн-режимі до 36 годин. Всі чеки зберігаються локально
+      та автоматично передаються до ДПС після відновлення з'єднання. Апаратні каси
+      також мають офлайн-режим.
+    </p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Як перенести дані на новий пристрій?</summary>
+    <p>
+      Всі дані зберігаються в хмарі та прив'язані до вашого облікового запису.
+      Для переносу достатньо встановити програму на новий пристрій та увійти
+      з вашими обліковими даними.
+    </p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Чи можна інтегрувати з Обліковою системою?</summary>
+    <p>
+      Так, всі наші продукти підтримують інтеграцію з бухгалтерськими програмами.
+      Доступні готові модулі обміну для популярних конфігурацій. Для нестандартних
+      випадків надаємо API та консультації з інтеграції.
+    </p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Яка гарантія на обладнання?</summary>
+    <p>
+      На все апаратне обладнання надається гарантія 24 місяці. Гарантійне обслуговування
+      включає безкоштовний ремонт або заміну обладнання у разі виробничого дефекту.
+    </p>
+  </details>
+</div>
+
+<h2 id="documentation">Документація</h2>
+
+<ul>
+  <li><a href="/docs/prro-basic-manual.pdf">Intellect ПРРО Basic — Інструкція користувача</a></li>
+  <li><a href="/docs/prro-pro-manual.pdf">Intellect ПРРО Pro — Інструкція користувача</a></li>
+  <li><a href="/docs/integration-guide.pdf">Посібник з інтеграції з ERP</a></li>
+  <li><a href="/docs/api-documentation.pdf">API документація для розробників</a></li>
+  <li><a href="/docs/hardware-setup.pdf">Налаштування апаратних кас</a></li>
+</ul>
+
+<style>
+  .lead {
+    font-size: 1.25rem;
+    color: #475569;
+    margin-bottom: 3rem;
+  }
+
+  .faq-list {
+    margin: 2rem 0;
+  }
+
+  .faq-item {
+    margin-bottom: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .faq-item summary {
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: #f8fafc;
+    transition: background 0.2s;
+  }
+
+  .faq-item summary:hover {
+    background: #f1f5f9;
+  }
+
+  .faq-item[open] summary {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .faq-item p {
+    padding: 1.5rem;
+    margin: 0;
+  }
+</style>

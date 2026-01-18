@@ -1,0 +1,217 @@
+// Hero Section Styles
+@use "variables" as *;
+
+.hero {
+  position: relative;
+  padding: $spacing-16 0 $spacing-20;
+  background: $gradient-hero;
+  overflow: hidden;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: $spacing-20 0 $spacing-24;
+  }
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba($color-accent, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba($color-accent, 0.05) 0%, transparent 40%);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba($color-accent, 0.08) 0%, transparent 70%);
+      transform: translate(30%, -30%);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+      transform: translate(-30%, 30%);
+    }
+  }
+}
+
+.hero-content {
+  position: relative;
+  display: grid;
+  gap: $spacing-12;
+  align-items: center;
+
+  @media (min-width: $breakpoint-lg) {
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-16;
+  }
+}
+
+.hero-text {
+  text-align: center;
+
+  @media (min-width: $breakpoint-lg) {
+    text-align: left;
+  }
+}
+
+.hero-label {
+  display: inline-block;
+  padding: $spacing-2 $spacing-4;
+  background: rgba($color-accent, 0.15);
+  color: $color-accent-light;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-full;
+  margin-bottom: $spacing-6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero-title {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-extrabold;
+  color: $color-gray-900; // Dark text for light background
+  margin-bottom: $spacing-6;
+  line-height: 1.2;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: $font-size-4xl;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    font-size: $font-size-5xl;
+  }
+
+  .highlight {
+    display: block;
+    color: $color-primary; // Red highlight
+  }
+}
+
+.hero-description {
+  font-size: $font-size-lg;
+  color: $color-gray-600; // Darker grey for readability
+  margin-bottom: $spacing-8;
+  max-width: 540px;
+
+  @media (min-width: $breakpoint-lg) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  margin-bottom: $spacing-10;
+
+  @media (min-width: $breakpoint-sm) {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    justify-content: flex-start;
+  }
+}
+
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-6;
+  justify-content: center;
+
+  @media (min-width: $breakpoint-lg) {
+    justify-content: flex-start;
+  }
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  color: $color-gray-600; // Darker trust items
+  font-size: $font-size-sm;
+
+  svg {
+    color: $color-accent;
+  }
+}
+
+// Hero Visual
+.hero-visual {
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: $breakpoint-lg) {
+    justify-content: flex-end;
+  }
+}
+
+.hero-image-wrapper {
+  position: relative;
+  max-width: 500px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba($color-accent, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: pulse 4s ease-in-out infinite;
+  }
+}
+
+.hero-image {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+.hero-badge {
+  position: absolute;
+  top: 10%;
+  right: -10px;
+  padding: $spacing-2 $spacing-4;
+  background: $color-accent;
+  color: $color-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  border-radius: $radius-full;
+  box-shadow: $shadow-lg;
+  z-index: 2;
+
+  @media (min-width: $breakpoint-md) {
+    right: -20px;
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}

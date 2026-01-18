@@ -1,0 +1,77 @@
+# Site Settings
+title: "Your Company Name | Professional Business Site"
+description: "Professional business website built with Jekyll. Customize this description for your company."
+tagline: "Your Company Tagline"
+url: "" # Base URL (e.g., https://yourcompany.com - set in production)
+baseurl: "" # Subpath if not at root (e.g., /blog)
+lang: en-US # Change to your language (e.g., uk-UA for Ukrainian)
+encoding: utf-8
+
+# Company Info
+company:
+  name: "Your Company Name"
+  phone: "+1 234 567 8900"
+  phone2: "+1 234 567 8901"
+  email: "info@yourcompany.com"
+  address: "123 Main Street, City, Country, 12345"
+
+# Social Links
+logo: /assets/images/favicon.png # Used by jekyll-seo-tag (replace with your logo)
+image: /assets/images/hero-default.jpg # Default social sharing image (add your image)
+social:
+  facebook: "https://facebook.com/yourcompany"
+  telegram: "https://t.me/yourcompany"
+  linkedin: "https://linkedin.com/company/yourcompany"
+
+# Build Settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Sass Configuration
+sass:
+  style: compressed
+  sass_dir: _sass
+  quiet_deps: true  # Suppress deprecation warnings from dependencies
+
+# Include/Exclude
+include:
+  - _pages
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .github
+  - README.md
+  - LICENSE
+
+# Collections
+collections:
+  products:
+    output: true
+    permalink: /products/:path/
+
+# Default Front Matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
+      type: "products"
+    values:
+      layout: "product"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Development Settings
+livereload: true
+

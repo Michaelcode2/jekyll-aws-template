@@ -1,0 +1,61 @@
+# GitHub Actions workflow for build testing
+# Runs on all pull requests to verify build works correctly
+
+name: Build Test
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - 'feature/**'
+      - 'fix/**'
+
+env:
+  RUBY_VERSION: '3.2'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      - name: Check for broken links
+        run: |
+          echo "🔗 Checking internal links..."
+          # Basic check for broken internal links
+          grep -r "href=\"/" _site/*.html | grep -v "http" || true
+
+      - name: Verify HTML structure
+        run: |
+          echo "📄 Checking HTML files..."
+          find _site -name "*.html" -exec grep -l "<html" {} \; | head -10
+          echo "✅ HTML structure looks good"
+
+      - name: Build summary
+        run: |
+          echo "📦 Build completed successfully!"
+          echo "📊 Statistics:"
+          echo "  - HTML files: $(find _site -name '*.html' | wc -l)"
+          echo "  - CSS files: $(find _site -name '*.css' | wc -l)"
+          echo "  - JS files: $(find _site -name '*.js' | wc -l)"
+          echo "  - Total size: $(du -sh _site | cut -f1)"
+

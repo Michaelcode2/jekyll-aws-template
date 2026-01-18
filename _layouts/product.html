@@ -1,0 +1,153 @@
+---
+layout: default
+---
+
+<section class="page-hero page-hero--product">
+  <div class="container">
+    <nav class="breadcrumbs">
+      <a href="{{ '/' | relative_url }}">Головна</a>
+      <span class="separator">/</span>
+      <a href="{{ '/products/' | relative_url }}">Продукція</a>
+      <span class="separator">/</span>
+      <span class="current">{{ page.title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="product-detail">
+  <div class="container">
+    <div class="product-detail-grid">
+      <div class="product-gallery">
+        <div class="product-main-image">
+          <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+        </div>
+        {% if page.gallery %}
+        <div class="product-thumbnails">
+          {% for img in page.gallery %}
+          <button class="thumbnail" data-image="{{ img | relative_url }}">
+            <img src="{{ img | relative_url }}" alt="{{ page.title }}">
+          </button>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      
+      <div class="product-info">
+        <span class="product-category-badge">{{ page.category_name }}</span>
+        <h1 class="product-title">{{ page.title }}</h1>
+        
+        <div class="product-price-block">
+          <span class="product-price-label">Ціна:</span>
+          <span class="product-price-value">{{ page.price }}</span>
+        </div>
+        
+        <div class="product-description">
+          {{ page.description | markdownify }}
+        </div>
+        
+        {% if page.features %}
+        <div class="product-features">
+          <h3>Характеристики:</h3>
+          <ul class="features-list">
+            {% for feature in page.features %}
+            <li>
+              <span class="feature-name">{{ feature.name }}:</span>
+              <span class="feature-value">{{ feature.value }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        
+        <div class="product-actions">
+          <a href="{{ '/contact/' | relative_url }}?product={{ page.title | url_encode }}" class="btn btn-primary btn-lg">Замовити</a>
+          <a href="tel:{{ site.company.phone | remove: ' ' }}" class="btn btn-outline btn-lg">Зателефонувати</a>
+        </div>
+        
+        {% if page.certifications %}
+        <div class="product-certifications">
+          <h4>Сертифікації:</h4>
+          <div class="certification-badges">
+            {% for cert in page.certifications %}
+            <span class="certification-badge">{{ cert }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-content-section">
+  <div class="container">
+    <div class="product-tabs">
+      <button class="product-tab active" data-tab="description">Опис</button>
+      <button class="product-tab" data-tab="specifications">Специфікації</button>
+      <button class="product-tab" data-tab="documents">Документація</button>
+    </div>
+    
+    <div class="product-tab-content active" id="tab-description">
+      {{ content }}
+    </div>
+    
+    <div class="product-tab-content" id="tab-specifications">
+      {% if page.specifications %}
+      <table class="specifications-table">
+        <tbody>
+          {% for spec in page.specifications %}
+          <tr>
+            <th>{{ spec.name }}</th>
+            <td>{{ spec.value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>Специфікації будуть додані найближчим часом.</p>
+      {% endif %}
+    </div>
+    
+    <div class="product-tab-content" id="tab-documents">
+      {% if page.documents %}
+      <ul class="documents-list">
+        {% for doc in page.documents %}
+        <li>
+          <a href="{{ doc.url | relative_url }}" target="_blank" class="document-link">
+            {% include icon.html name="file-text" size=20 class="doc-icon" %}
+            {{ doc.name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>Документація буде додана найближчим часом.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="related-products">
+  <div class="container">
+    <h2 class="section-title">Схожі продукти</h2>
+    <div class="products-grid">
+      {% assign related = site.products | where: "category", page.category | where_exp: "item", "item.url != page.url" | limit: 3 %}
+      {% for product in related %}
+      <div class="product-card">
+        <div class="product-image">
+          <img src="{{ product.image | relative_url }}" alt="{{ product.title }}" loading="lazy">
+        </div>
+        <div class="product-content">
+          <span class="product-category">{{ product.category_name }}</span>
+          <h3 class="product-title">{{ product.title }}</h3>
+          <div class="product-footer">
+            <span class="product-price">{{ product.price }}</span>
+            <a href="{{ product.url | relative_url }}" class="btn btn-outline">Детальніше</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+

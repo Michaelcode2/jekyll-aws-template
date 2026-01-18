@@ -1,0 +1,234 @@
+// Button Components
+@use "variables" as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  padding: $spacing-3 $spacing-6;
+  font-family: $font-family-heading;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: $radius-md;
+  transition: all $transition-base;
+  cursor: pointer;
+  border: 2px solid transparent;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.btn-sm {
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-xs;
+}
+
+.btn-lg {
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-base;
+}
+
+.btn-primary {
+  background: $gradient-primary; // Use Primary (Red) for primary buttons
+  color: $color-white;
+
+  &:hover {
+    background: $color-accent-dark;
+    color: $color-white;
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+.btn-secondary {
+  background: $color-gray-100;
+  color: $color-gray-700;
+
+  &:hover {
+    background: $color-gray-200;
+    color: $color-gray-900;
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  color: $color-accent;
+  border-color: $color-accent;
+
+  &:hover {
+    background: $color-accent;
+    color: $color-white;
+  }
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: $color-white;
+  border-color: $color-white;
+
+  &:hover {
+    background: $color-white;
+    color: $color-primary;
+  }
+}
+
+.btn-white {
+  background: $color-white;
+  color: $color-primary;
+
+  &:hover {
+    background: $color-gray-100;
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Section Components
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-12;
+}
+
+.section-label {
+  display: inline-block;
+  padding: $spacing-1 $spacing-3;
+  background: rgba($color-accent, 0.1);
+  color: $color-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-full;
+  margin-bottom: $spacing-4;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.section-title {
+  margin-bottom: $spacing-4;
+}
+
+.section-subtitle {
+  font-size: $font-size-lg;
+  color: $color-gray-500;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-cta {
+  text-align: center;
+  margin-top: $spacing-12;
+}
+
+// Card Components
+.card {
+  background: $color-white;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-md;
+  overflow: hidden;
+  transition: all $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-xl;
+    transform: translateY(-4px);
+  }
+}
+
+// Breadcrumbs
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+  margin-bottom: $spacing-4;
+
+  a {
+    color: $color-gray-400;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  .separator {
+    color: $color-gray-400;
+  }
+
+  .current {
+    color: $color-gray-600;
+  }
+}
+
+// Badge
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-1 $spacing-3;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-full;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+// Forms
+.form-group {
+  margin-bottom: $spacing-6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: $spacing-2;
+  font-weight: $font-weight-medium;
+  color: $color-gray-700;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-base;
+  border: 2px solid $color-gray-200;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+  background: $color-white;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba($color-accent, 0.1);
+  }
+
+  &::placeholder {
+    color: $color-gray-400;
+  }
+}
+
+.form-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.filter-select {
+  padding: $spacing-2 $spacing-4;
+  border: 2px solid $color-gray-200;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  color: $color-gray-700;
+  background: $color-white;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+  }
+}

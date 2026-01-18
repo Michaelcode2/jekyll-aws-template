@@ -1,0 +1,13 @@
+---
+layout: null
+---
+{% if jekyll.environment == 'development' %}
+User-agent: *
+Disallow: /
+{% else %}
+User-agent: *
+Allow: /
+
+Sitemap: {{ site.url }}/sitemap.xml
+{% endif %}
+

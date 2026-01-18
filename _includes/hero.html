@@ -1,0 +1,55 @@
+<section class="hero">
+  <div class="hero-background">
+    <div class="hero-pattern"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="hero-label">Офіційний партнер MASTER</span>
+        <h1 class="hero-title">
+          Платформа для <span class="highlight">управління обліком</span> MASTER
+        </h1>
+        <p class="hero-description">
+          Комплексні рішення для автоматизації бізнесу.
+          Бухгалтерія, Зарплата, Кадри, Торгівля — в одній системі.
+          Повна відповідність законодавству України.
+        </p>
+        <div class="hero-actions">
+          <a href="{{ '/products/' | relative_url }}" class="btn btn-outline btn-lg">
+            Всі продукти
+            {% include icon.html name="arrow-right" size=20 %}
+          </a>
+          <a href="{{ '/contact/' | relative_url }}" class="btn btn-primary btn-lg">
+            Отримати консультацію
+          </a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            {% include icon.html name="check-circle" size=24 %}
+            <span>Український продукт</span>
+          </div>
+          <div class="trust-item">
+            {% include icon.html name="shield" size=24 %}
+            <span>Відповідність законодавству</span>
+          </div>
+          <div class="trust-item">
+            {% include icon.html name="clock" size=24 %}
+            <span>Професійна підтримка</span>
+          </div>
+          <div class="trust-item">
+            {% include icon.html name="certificate" size=24 %}
+            <span>Сучасна сертифікована платформа</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image-wrapper">
+          <img src="{{ '/assets/images/Laptop_1.jpeg' | relative_url }}" alt="MASTER Бухгалтерія" class="hero-image">
+          <div class="hero-badge">
+            <span class="badge-text">MASTER:Бухгалтерія</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

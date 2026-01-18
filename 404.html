@@ -1,0 +1,63 @@
+---
+layout: default
+title: "Сторінку не знайдено"
+permalink: /404.html
+---
+
+<section class="error-page">
+  <div class="container">
+    <div class="error-content">
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Сторінку не знайдено</h2>
+      <p class="error-message">
+        На жаль, сторінка, яку ви шукаєте, не існує або була переміщена.
+      </p>
+      <div class="error-actions">
+        <a href="{{ '/' | relative_url }}" class="btn btn-primary btn-lg">На головну</a>
+        <a href="{{ '/products/' | relative_url }}" class="btn btn-outline btn-lg">Переглянути продукти</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.error-page {
+  padding: 8rem 0;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.error-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-code {
+  font-size: 8rem;
+  font-weight: 800;
+  color: #00a8a8;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.error-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  font-size: 1.125rem;
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+</style>
+

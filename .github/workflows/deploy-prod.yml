@@ -1,0 +1,105 @@
+# GitHub Actions workflow for Production deployment
+# Triggers on push to 'main' branch
+# Deploys to production S3 bucket and invalidates CloudFront cache
+# Uses AWS OIDC authentication (no access keys needed)
+
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # Required for OIDC authentication
+  contents: read
+
+env:
+  RUBY_VERSION: '3.2'
+  JEKYLL_ENV: production
+  AWS_REGION: eu-central-1
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Build Jekyll site (Production)
+        run: |
+          bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      - name: Verify build output
+        run: |
+          echo "📦 Build output:"
+          ls -la _site/
+          echo ""
+          echo "📄 HTML files count: $(find _site -name '*.html' | wc -l)"
+          echo "🎨 CSS files count: $(find _site -name '*.css' | wc -l)"
+          echo "📜 JS files count: $(find _site -name '*.js' | wc -l)"
+          echo "📊 Total size: $(du -sh _site | cut -f1)"
+
+      - name: Configure AWS credentials with OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: GitHubActions-Jekyll-Prod-${{ github.run_id }}
+
+      - name: Deploy to S3 (Production)
+        run: |
+          echo "📦 Deploying to S3 bucket: ${{ vars.S3_BUCKET_PROD }}"
+          
+          # Deploy static assets with long cache
+          aws s3 sync _site/ s3://${{ vars.S3_BUCKET_PROD }} \
+            --delete \
+            --cache-control "max-age=31536000, immutable" \
+            --exclude "*.html" \
+            --exclude "*.xml" \
+            --exclude "*.json"
+          
+          # Deploy HTML and dynamic files with shorter cache
+          aws s3 sync _site/ s3://${{ vars.S3_BUCKET_PROD }} \
+            --cache-control "max-age=3600, must-revalidate" \
+            --exclude "*" \
+            --include "*.html" \
+            --include "*.xml" \
+            --include "*.json"
+
+      - name: Invalidate CloudFront cache (Production)
+        run: |
+          echo "♻️ Invalidating CloudFront distribution: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID_PROD }}"
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
+            --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID_PROD }} \
+            --paths "/*" \
+            --query 'Invalidation.Id' \
+            --output text)
+          echo "Invalidation ID: ${INVALIDATION_ID}"
+
+      - name: Deployment summary
+        run: |
+          echo "## Production Deployment Summary 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment**: Production" >> $GITHUB_STEP_SUMMARY
+          echo "- **Region**: ${{ env.AWS_REGION }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **S3 Bucket**: ${{ vars.S3_BUCKET_PROD }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **CloudFront**: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID_PROD }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Production deployment completed!" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 Check your production domain or CloudFront URL" >> $GITHUB_STEP_SUMMARY

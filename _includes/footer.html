@@ -1,0 +1,86 @@
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="{{ '/' | relative_url }}" class="footer-logo">
+            <span class="logo-text">Intellect</span>
+            <span class="logo-accent">Technologies</span>
+          </a>
+          <p class="footer-description">
+            Комплексні рішення для автоматизації бізнесу.
+            Програмне забезпечення для бухгалтерів.
+          </p>
+          <div class="footer-social">
+            {% if site.social.facebook %}
+            <a href="{{ site.social.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+              {% include icon.html name="facebook" size=20 fill="currentColor" stroke="none" %}
+            </a>
+            {% endif %}
+            {% if site.social.telegram %}
+            <a href="{{ site.social.telegram }}" target="_blank" rel="noopener" aria-label="Telegram">
+              {% include icon.html name="telegram" size=20 fill="currentColor" stroke="none" %}
+            </a>
+            {% endif %}
+            {% if site.social.linkedin %}
+            <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+              {% include icon.html name="linkedin" size=20 fill="currentColor" stroke="none" %}
+            </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="footer-nav">
+          <h4 class="footer-title">Продукція</h4>
+          <ul class="footer-links">
+            <li><a href="{{ '/products/' | relative_url }}?category=accounting">Бухгалтерія</a></li>
+            <li><a href="{{ '/products/' | relative_url }}?category=documanagement">Документація</a></li>
+            <li><a href="{{ '/products/' | relative_url }}?category=salary">Зарплата і Кадри</a></li>
+            <li><a href="{{ '/products/' | relative_url }}">Всі продукти</a></li>
+          </ul>
+        </div>с
+
+        <div class="footer-nav">
+          <h4 class="footer-title">Компанія</h4>
+          <ul class="footer-links">
+            <li><a href="{{ '/about/' | relative_url }}">Про нас</a></li>
+            <li><a href="{{ '/contact/' | relative_url }}">Контакти</a></li>
+            <li><a href="{{ '/support/' | relative_url }}">Підтримка</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4 class="footer-title">Контакти</h4>
+          <ul class="contact-list">
+            <li>
+              {% include icon.html name="map-pin" size=18 %}
+              <span>{{ site.company.address }}</span>
+            </li>
+            <li>
+              {% include icon.html name="phone" size=18 %}
+              <a href="tel:{{ site.company.phone | remove: ' ' }}">{{ site.company.phone }}</a>
+            </li>
+            <li>
+              {% include icon.html name="mail" size=18 %}
+              <a href="mailto:{{ site.company.email }}">{{ site.company.email }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-content">
+        <p class="copyright">
+          &copy; {{ site.time | date: '%Y' }} {{ site.company.name }}. Всі права захищені.
+        </p>
+        <ul class="footer-legal">
+          <li><a href="{{ '/privacy/' | relative_url }}">Політика конфіденційності</a></li>
+          <li><a href="{{ '/terms/' | relative_url }}">Умови використання</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

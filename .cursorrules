@@ -1,0 +1,136 @@
+# Cursor Rules for Jekyll Intellect PRRO Project
+
+## Project Overview
+- **Framework**: Jekyll static site generator
+- **Style**: Business/Professional
+- **Purpose**: Template landing page
+- **Repository**: GitHub
+- **Deployment**: AWS S3 static site hosting with CloudFront CDN and SSL
+- **CI/CD**: GitHub Actions workflows
+- **Environments**: Development (dev) and Production (prod)
+
+## Language Requirements
+- Code comments in English
+- Variable names and function names can in English (standard practice)
+
+## Jekyll Best Practices
+- Use Jekyll 4.x or latest stable version
+- Follow Jekyll directory structure conventions:
+  - `_config.yml` for site configuration
+  - `_posts/` for blog posts (if applicable)
+  - `_layouts/` for layout templates
+  - `_includes/` for reusable components
+  - `_sass/` for Sass partials
+  - `assets/` for CSS, JS, images
+- Use Liquid templating language correctly
+- Optimize for static site generation
+- Use Jekyll plugins sparingly and document them
+
+## Code Style & Structure
+- Use semantic HTML5
+- Follow BEM methodology for CSS class naming (or similar)
+- Use SCSS/Sass for stylesheets
+- Keep JavaScript modular and minimal (prefer vanilla JS or lightweight frameworks)
+- Use meaningful variable and function names
+- Maintain consistent indentation (2 spaces for YAML, 2-4 spaces for HTML/CSS/JS)
+
+## Business Style Guidelines
+- Professional, clean, modern design
+- Focus on clarity and conversion
+- Ensure responsive design (mobile-first approach)
+- Accessible design (WCAG 2.1 AA compliance)
+- Clear call-to-action buttons
+- Professional typography
+
+## AWS Deployment Configuration
+- S3 bucket configuration:
+  - Static website hosting enabled
+  - Proper bucket policies for CloudFront access
+  - Environment-specific buckets (dev/prod)
+- CloudFront distribution:
+  - SSL/TLS certificate (ACM)
+  - Custom domain configuration
+  - Caching policies optimized for static content
+  - Error pages configuration
+- Environment variables:
+  - Use separate S3 buckets for dev and prod
+  - Use different CloudFront distributions per environment
+  - Configure via GitHub Actions secrets or GitLab CI variables
+
+## CI/CD Workflow Requirements
+- **GitHub Actions** (if using GitHub):
+  - Workflow files in `.github/workflows/`
+  - Separate workflows for dev and prod deployments
+  - Build Jekyll site before deployment
+  - Deploy to appropriate S3 bucket based on branch/environment
+  - Invalidate CloudFront cache after deployment
+- **GitLab CI** (if using GitLab):
+  - `.gitlab-ci.yml` in project root
+  - Separate stages for dev and prod
+  - Use GitLab CI variables for AWS credentials
+- Build process:
+  - Install dependencies (Ruby gems)
+  - Build Jekyll site (`jekyll build`)
+  - Test build output
+  - Deploy to S3
+  - Invalidate CloudFront
+
+## Environment Management
+- **Development (dev)**:
+  - Deploy from `develop` or `dev` branch
+  - Use dev S3 bucket and CloudFront distribution
+  - May include draft content and debug information
+- **Production (prod)**:
+  - Deploy from `main` or `master` branch
+  - Use production S3 bucket and CloudFront distribution
+  - Optimized, minified assets
+  - No debug information
+  - Production-ready content only
+  - allow seach robots scan production version only (robots.txt)
+
+## File Organization
+- Keep configuration files at root level
+- Organize assets logically (images, CSS, JS)
+- Use includes for reusable components
+- Separate concerns (layout, content, styling)
+- Document custom configurations
+
+## Security & Performance
+- Use environment variables for sensitive data
+- Optimize images (WebP format where possible)
+- Minify CSS and JavaScript in production
+- Enable CloudFront compression
+- Use HTTPS everywhere (SSL/TLS)
+- Implement proper caching headers
+
+## Testing & Quality Assurance
+- Test locally with `jekyll serve` before committing
+- Validate HTML markup
+- Check Ukrainian language content for typos
+- Verify all links and assets load correctly
+- Test deployment process in dev before prod
+
+## Documentation
+- Keep README.md updated with setup instructions
+- Document custom Jekyll configurations
+- Document deployment process
+- Include environment setup instructions
+
+## When Writing Code
+- Ensure proper character encoding in all files
+- Consider right-to-left layouts if needed
+
+## Common Tasks
+- Adding new pages: Create in root or appropriate directory, add to navigation
+- Adding products: Create product pages with consistent structure
+- Updating content: Edit markdown files
+- Deploying: Push to appropriate branch, CI/CD handles deployment
+- Debugging: Use `jekyll serve --verbose` for detailed output
+
+## Dependencies Management
+- Use `Gemfile` for Ruby dependencies
+- Pin Jekyll version
+- Document all plugins and their purposes
+- Keep dependencies up to date (security updates)
+- Use `bundle install` for dependency management
+

@@ -1,0 +1,166 @@
+---
+layout: page
+title: "Contact Us"
+subtitle: "Get in touch for consultation or inquiries"
+description: "Contact information for {{ site.company.name }}. Phone, email, office address, and contact form."
+---
+
+<div class="contact-wrapper">
+  <div class="contact-info">
+    <h2>How to Reach Us</h2>
+    <p>
+      Have questions about our products or need a consultation?
+      We're always happy to help! Contact us using any convenient method.
+    </p>
+
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-icon">
+          {% include icon.html name="map-pin" size=24 %}
+        </div>
+        <div class="contact-text">
+          <h4>Адреса</h4>
+          <p>{{ site.company.address }}</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          {% include icon.html name="phone" size=24 %}
+        </div>
+        <div class="contact-text">
+          <h4>Телефон</h4>
+          <p><a href="tel:{{ site.company.phone | remove: ' ' }}">{{ site.company.phone }}</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          {% include icon.html name="phone" size=24 %}
+        </div>
+        <div class="contact-text">
+          <h4>Телефон</h4>
+          <p><a href="tel:{{ site.company.phone | remove: ' ' }}">{{ site.company.phone2 }}</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          {% include icon.html name="mail" size=24 %}
+        </div>
+        <div class="contact-text">
+          <h4>Email</h4>
+          <p><a href="mailto:{{ site.company.email }}">{{ site.company.email }}</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          {% include icon.html name="clock" size=24 %}
+        </div>
+        <div class="contact-text">
+          <h4>Business Hours</h4>
+          <p>Mon-Fri: 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form-wrapper">
+    <h3>Send Us a Message</h3>
+    <p><em>Note: Replace the form action URL with your own Formspree ID or contact form service.</em></p>
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name" class="form-label">Your Name *</label>
+          <input type="text" id="name" name="name" class="form-input" required placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone *</label>
+          <input type="tel" id="phone" name="phone" class="form-input" required placeholder="+1 234 567 8900">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com">
+      </div>
+
+      <div class="form-group">
+        <label for="subject" class="form-label">Subject</label>
+        <select id="subject" name="subject" class="form-input">
+          <option value="">Choose a subject</option>
+          <option value="consultation">Product Consultation</option>
+          <option value="support">Technical Support</option>
+          <option value="partnership">Partnership</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message" class="form-label">Message *</label>
+        <textarea id="message" name="message" class="form-textarea" required
+          placeholder="Describe your question or request..."></textarea>
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn btn-primary btn-lg">Send Message</button>
+      <div id="form-status" style="margin-top: 15px; display: none;"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  var form = document.getElementById("contact-form");
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    var status = document.getElementById("form-status");
+    var btn = document.getElementById("submit-btn");
+    var originalBtnText = btn.innerHTML;
+    var data = new FormData(event.target);
+
+    // Validate form ID
+    if (form.action.includes("YOUR_FORM_ID")) {
+      status.style.display = "block";
+      status.style.color = "red";
+      status.innerHTML = "Configuration error: Form ID not set. Please configure your Formspree ID.";
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = "Sending...";
+
+    fetch(event.target.action, {
+      method: form.method,
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      status.style.display = "block";
+      if (response.ok) {
+        status.style.color = "green";
+        status.innerHTML = "Thank you! Your message has been sent successfully.";
+        form.reset();
+      } else {
+        response.json().then(data => {
+          if (Object.hasOwn(data, 'errors')) {
+            status.style.color = "red";
+            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+          } else {
+            status.style.color = "red";
+            status.innerHTML = "An error occurred while sending the form. Please try again later.";
+          }
+        })
+      }
+    }).catch(error => {
+      status.style.display = "block";
+      status.style.color = "red";
+      status.innerHTML = "An error occurred while sending the form. Please try again later.";
+    }).finally(() => {
+      btn.disabled = false;
+      btn.innerHTML = originalBtnText;
+    });
+  }
+  form.addEventListener("submit", handleSubmit);
+</script>

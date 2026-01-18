@@ -1,0 +1,21 @@
+{%- assign icon_name = include.name -%}
+{%- assign icon_svg = site.data.icons[icon_name] -%}
+
+{%- if icon_svg -%}
+  <svg 
+    class="icon {{ include.class }}" 
+    width="{{ include.size | default: 24 }}" 
+    height="{{ include.size | default: 24 }}" 
+    viewBox="0 0 24 24" 
+    fill="{{ include.fill | default: 'none' }}" 
+    stroke="{{ include.stroke | default: 'currentColor' }}" 
+    stroke-width="{{ include.stroke_width | default: include.stroke | default: 2 }}" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+    {% if include.aria_hidden %}aria-hidden="true"{% endif %}
+  >
+    {{ icon_svg }}
+  </svg>
+{%- else -%}
+  <span class="icon icon-{{ icon_name }}"></span>
+{%- endif -%}

@@ -1,0 +1,16 @@
+# Development environment overrides
+# This file is merged with _config.yml during development builds
+
+url: "https://dev.yourcompany.com" # Update with your dev URL or CloudFront URL
+
+# Enable drafts and future posts in development
+show_drafts: true
+future: true
+
+# Verbose output for debugging
+verbose: true
+
+# Disable minification for easier debugging
+sass:
+  style: expanded
+

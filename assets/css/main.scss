@@ -1,0 +1,18 @@
+---
+---
+
+// Main Stylesheet
+// Using modern Sass module system (@use)
+// The 'as *' syntax imports all variables/mixins into the global namespace
+// This maintains compatibility with existing code structure
+
+@use "variables" as *;
+@use "base";
+@use "components";
+@use "header";
+@use "hero";
+@use "sections";
+@use "footer";
+@use "pages";
+@use "product";
+

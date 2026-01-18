@@ -1,0 +1,230 @@
+---
+layout: default
+body_class: home-page
+---
+
+{% include hero.html %}
+
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Переваги</span>
+      <h2 class="section-title">Чому обирають MASTER</h2>
+      <p class="section-subtitle">Єдина платформа для ефективного управління вашим бізнесом</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          {% include icon.html name="integration" size=28 %}
+        </div>
+        <h3 class="feature-title">Єдиний простір</h3>
+        <p class="feature-description">Усі дані в єдиному цифровому просторі, що автоматично синхронізуються.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          {% include icon.html name="certificate" size=28 %}
+        </div>
+        <h3 class="feature-title">Без помилок</h3>
+        <p class="feature-description">Податки та звіти формуються автоматично та без помилок.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          {% include icon.html name="clock" size=28 %}
+        </div>
+        <h3 class="feature-title">Аналітика 24/7</h3>
+        <p class="feature-description">Керівник бачить фінансову картину компанії онлайн у будь-який час.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          {% include icon.html name="certificate" size=28 %}
+        </div>
+        <h3 class="feature-title">Податкова звітність</h3>
+        <p class="feature-description">Формування податкової звітності автоматично.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products-section" id="solutions">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Рішення</span>
+      <h2 class="section-title">Для кого підходить MASTER Бухгалтерія</h2>
+      <p class="section-subtitle">Спеціалізовані рішення для різних типів організацій</p>
+    </div>
+
+    <div class="benefits-wrapper" id="business" style="margin-bottom: 4rem;">
+      <div class="benefits-content">
+        <h3 class="section-title" style="font-size: 1.75rem;">Малий і середній бізнес</h3>
+        <p class="benefits-text">
+          Для малого та середнього бізнесу MASTER Бухгалтерія — це управлінський центр. Онлайн-доступ 24/7 до фінансових
+          показників,
+          контроль платежів, податків і зарплат.
+          Керівник бачить динаміку прибутку, бухгалтер — точні цифри, CFO — аналітику для рішень.
+        </p>
+        <ul class="benefits-list">
+          <li><span class="benefit-icon">{% include icon.html name="check-circle" size=20 %}</span>Контроль фінансів
+          </li>
+          <li><span class="benefit-icon">{% include icon.html name="check-circle" size=20 %}</span>Аналітика прибутку
+          </li>
+          <li><span class="benefit-icon">{% include icon.html name="check-circle" size=20 %}</span>Галузеві модулі</li>
+        </ul>
+      </div>
+      <div class="benefits-image">
+        <!-- Use placeholder or existing image -->
+        <img src="{{ '/assets/images/master_banner.webp' | relative_url }}" alt="Бізнес рішення">
+      </div>
+    </div>
+
+    <!-- <div class="benefits-wrapper" id="budget" style="flex-direction: row-reverse; margin-bottom: 4rem;">
+      <div class="benefits-content">
+        <h3 class="section-title" style="font-size: 1.75rem;">Бюджетні установи</h3>
+        <p class="benefits-text">
+          MASTER має модулі для обліку державних закупівель, звітності до казначейства, формування кошторисів і контролю
+          використання бюджетних коштів.
+          Готовий набір інструментів, який відповідає вимогам законодавства.
+        </p>
+        <ul class="benefits-list">
+          <li><span class="benefit-icon">{% include icon.html name="check-circle" size=20 %}</span>Облік держзакупівель
+          </li>
+          <li><span class="benefit-icon">{% include icon.html name="check-circle" size=20 %}</span>Звітність до
+            казначейства</li>
+          <li><span class="benefit-icon">{% include icon.html name="check-circle" size=20 %}</span>Формування кошторисів
+          </li>
+        </ul>
+      </div>
+      <div class="benefits-image">
+        <img src="{{ '/assets/images/Casio_new.jpg' | relative_url }}" alt="Бюджетні установи">
+      </div>
+    </div> -->
+
+  </div>
+</section>
+
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Продукти</span>
+      <h2 class="section-title">Продукти платформи MASTER</h2>
+      <p class="section-subtitle">Оберіть рішення, яке підходить саме вам</p>
+    </div>
+
+    <div class="products-tabs">
+      <button class="tab-btn active" data-tab="accounting">Бухгалтерія</button>
+      <button class="tab-btn" data-tab="salary">Зарплата і Кадри</button>
+      <button class="tab-btn" data-tab="documanagement">Документообіг</button>
+    </div>
+
+    <div class="products-grid" id="products-grid">
+      {% assign products = site.products | sort: 'order' %}
+      {% for product in products limit: 6 %}
+      <div class="product-card" data-category="{{ product.category }}">
+        <div class="product-badge {% if product.popular %}popular{% endif %}">
+          {% if product.popular %}Популярний{% endif %}
+        </div>
+        <div class="product-image">
+          <img src="{{ product.image | relative_url }}" alt="{{ product.title }}" loading="lazy">
+        </div>
+        <div class="product-content">
+          <span class="product-category">{{ product.category_name }}</span>
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-excerpt">{{ product.excerpt }}</p>
+          <div class="product-footer">
+            <span class="product-price">{{ product.price }}</span>
+            <a href="{{ product.url | relative_url }}" class="btn btn-outline">Детальніше</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="section-cta">
+      <a href="{{ '/products/' | relative_url }}" class="btn btn-primary btn-lg">Всі продукти</a>
+    </div>
+  </div>
+</section>
+
+<section class="benefits-section" id="about">
+  <div class="container">
+    <div class="benefits-wrapper">
+      <div class="benefits-content">
+        <span class="section-label">Про компанію</span>
+        <h2 class="section-title">Інтелект Технолоджіс — ваш партнер MASTER</h2>
+        <p class="benefits-text">
+          Ми є офіційним партнером та реселлером платформи MASTER.
+          Забезпечуємо впровадження, навчання персоналу та технічну підтримку.
+        </p>
+        <ul class="benefits-list">
+          <li>
+            <span class="benefit-icon">
+              {% include icon.html name="certificate" size=20 %}
+            </span>
+            Ліцензоване ПЗ
+          </li>
+          <li>
+            <span class="benefit-icon">
+              {% include icon.html name="integration" size=20 %}
+            </span>
+            Допомога у впровадженні
+          </li>
+          <li>
+            <span class="benefit-icon">
+              {% include icon.html name="support" size=20 %}
+            </span>
+            Кваліфікована підтримка
+          </li>
+        </ul>
+        <a href="{{ '/contact/' | relative_url }}" class="btn btn-primary">Зв'язатись з нами</a>
+      </div>
+      <div class="benefits-image">
+        <img src="{{ '/assets/images/master_banner.webp' | relative_url }}" alt="Про компанію Інтелект Технолоджіс">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Відгуки</span>
+      <h2 class="section-title">Що кажуть наші клієнти</h2>
+    </div>
+
+    <div class="testimonials-slider">
+      {% for testimonial in site.data.testimonials %}
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">{{ testimonial.text }}</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <span class="author-name">{{ testimonial.author }}</span>
+            <span class="author-position">{{ testimonial.position }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section> -->
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-wrapper">
+      <div class="cta-content">
+        <h2 class="cta-title">Готові розпочати?</h2>
+        <p class="cta-text">Зв'яжіться з нами для безкоштовної консультації та підбору оптимального рішення для вашого
+          бізнесу</p>
+      </div>
+      <div class="cta-actions">
+        <a href="{{ '/contact/' | relative_url }}" class="btn btn-white btn-lg">Зв'язатись з нами</a>
+        <a href="tel:{{ site.company.phone | remove: ' ' }}" class="btn btn-outline-white btn-lg">{{ site.company.phone
+          }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ content }}

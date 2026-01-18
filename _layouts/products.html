@@ -1,0 +1,84 @@
+---
+layout: default
+---
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumbs">
+      <a href="{{ '/' | relative_url }}">Головна</a>
+      <span class="separator">/</span>
+      <span class="current">{{ page.title }}</span>
+    </nav>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="page-subtitle">{{ page.subtitle }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="products-catalog">
+  <div class="container">
+    <div class="catalog-filters">
+      <div class="filter-group">
+        <label>Категорія:</label>
+        <select id="category-filter" class="filter-select">
+          <option value="all">Всі продукти</option>
+          <!-- <option value="software">Програмне забезпечення</option> -->
+          <!-- <option value="hardware">Апаратні РРО</option> -->
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Сортування:</label>
+        <select id="sort-filter" class="filter-select">
+          <option value="popular">За популярністю</option>
+          <option value="price-asc">Ціна: від низької</option>
+          <option value="price-desc">Ціна: від високої</option>
+          <option value="name">За назвою</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products-grid products-grid--catalog" id="catalog-grid">
+      {% assign products = site.products | sort: 'order' %}
+      {% for product in products %}
+      <div class="product-card" data-category="{{ product.category }}" data-price="{{ product.price_value }}"
+        data-name="{{ product.title }}">
+        {% if product.popular %}
+        <div class="product-badge popular">Популярний</div>
+        {% endif %}
+        {% if product.new %}
+        <div class="product-badge new">Новинка</div>
+        {% endif %}
+        <div class="product-image">
+          <img src="{{ product.image | relative_url }}" alt="{{ product.title }}" loading="lazy">
+        </div>
+        <div class="product-content">
+          <span class="product-category">{{ product.category_name }}</span>
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-excerpt">{{ product.excerpt }}</p>
+          <div class="product-footer">
+            <span class="product-price">{{ product.price }}</span>
+            <a href="{{ product.url | relative_url }}" class="btn btn-outline">Детальніше</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-section cta-section--compact">
+  <div class="container">
+    <div class="cta-wrapper">
+      <div class="cta-content">
+        <h2 class="cta-title">Потрібна допомога з вибором?</h2>
+        <p class="cta-text">Наші експерти допоможуть підібрати оптимальне рішення для вашого бізнесу</p>
+      </div>
+      <div class="cta-actions">
+        <a href="{{ '/contact/' | relative_url }}" class="btn btn-white">Отримати консультацію</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ content }}

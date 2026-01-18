@@ -1,0 +1,18 @@
+# Homepage Features
+# Add your company's key features/benefits here
+- title: "Feature One"
+  description: "Description of your first key feature or benefit"
+  icon: "certificate"
+
+- title: "Feature Two"
+  description: "Description of your second key feature or benefit"
+  icon: "support"
+
+- title: "Feature Three"
+  description: "Description of your third key feature or benefit"
+  icon: "integration"
+
+- title: "Feature Four"
+  description: "Description of your fourth key feature or benefit"
+  icon: "warranty"
+

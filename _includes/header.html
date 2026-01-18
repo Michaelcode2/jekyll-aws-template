@@ -1,0 +1,76 @@
+<header class="site-header">
+  <div class="header-top">
+    <div class="container">
+      <div class="header-top-content">
+        <div class="header-contact">
+          <a href="tel:{{ site.company.phone | remove: ' ' }}" class="header-phone">
+            {% include icon.html name="phone" size=16 %}
+            {{ site.company.phone }}
+          </a>
+          <a href="mailto:{{ site.company.email }}" class="header-email">
+            {% include icon.html name="mail" size=16 %}
+            {{ site.company.email }}
+          </a>
+        </div>
+        <div class="header-social">
+          {% if site.social.facebook %}
+          <a href="{{ site.social.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+            {% include icon.html name="facebook" size=18 fill="currentColor" stroke="none" %}
+          </a>
+          {% endif %}
+          {% if site.social.telegram %}
+          <a href="{{ site.social.telegram }}" target="_blank" rel="noopener" aria-label="Telegram">
+            {% include icon.html name="telegram" size=18 fill="currentColor" stroke="none" %}
+          </a>
+          {% endif %}
+          {% if site.social.linkedin %}
+          <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+            {% include icon.html name="linkedin" size=18 fill="currentColor" stroke="none" %}
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="header-main">
+    <div class="container">
+      <div class="header-main-content">
+        <a href="{{ '/' | relative_url }}" class="logo">
+          <span class="logo-text">Інтелект Технолоджіс</span>
+          <!--<span class="logo-accent"></span> -->
+        </a>
+
+        <button class="mobile-menu-toggle" aria-label="Меню" aria-expanded="false">
+          <span class="hamburger"></span>
+        </button>
+
+        <div class="nav-wrapper">
+          <ul class="nav-menu">
+            {% for item in site.data.navigation.main %}
+            <li class="nav-item {% if item.children %}has-dropdown{% endif %}">
+              <a href="{{ item.url | relative_url }}" class="nav-link {% if page.url == item.url %}active{% endif %}">
+                {{ item.title }}
+                {% if item.children %}
+                {% include icon.html name="chevron-down" size=10 class="dropdown-icon" %}
+                {% endif %}
+              </a>
+              {% if item.children %}
+              <ul class="dropdown-menu">
+                {% for child in item.children %}
+                <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+
+          <div class="nav-cta">
+            <a href="{{ '/contact/' | relative_url }}" class="btn btn-primary">Зв'язатись</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
