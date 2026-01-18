@@ -1,5 +1,5 @@
 /**
- * Інтелект Технолоджіс - Main JavaScript
+ * Main JavaScript
  * Handles UI interactions, navigation, and animations
  */
 
