@@ -1,0 +1,159 @@
+---
+description: Jekyll development patterns and best practices
+globs: ["*.html", "*.md", "_config.yml", "_config_dev.yml", "Gemfile"]
+---
+
+# Jekyll Development Guide
+
+## Configuration (_config.yml)
+
+Key settings structure:
+
+```yaml
+title: "Site Title"
+description: "SEO description"
+url: "https://example.com"
+baseurl: ""
+
+collections:
+  products:
+    output: true
+    permalink: /products/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "products"
+    values:
+      layout: "product"
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+```
+
+**Important**: Restart `jekyll serve` after config changes.
+
+## Front Matter
+
+Every content file starts with YAML front matter:
+
+```yaml
+---
+layout: page
+title: "Page Title"
+description: "SEO description"
+permalink: /custom-url/
+---
+```
+
+### Product Front Matter
+
+```yaml
+---
+layout: product
+title: "Product Name"
+excerpt: "Short description"
+category: software
+category_name: "Category Display Name"
+price: "від 1 500 ₴"
+price_value: 1500
+image: /assets/images/products/product.webp
+popular: false
+new: true
+order: 10
+features:
+  - name: "Feature"
+    value: "Value"
+---
+```
+
+## Collections
+
+Products are in `_products/` directory. Access in templates:
+
+```liquid
+{% for product in site.products %}
+  <a href="{{ product.url }}">{{ product.title }}</a>
+{% endfor %}
+
+{% assign software = site.products | where: "category", "software" %}
+{% assign sorted = site.products | sort: "order" %}
+```
+
+## Data Files (_data/)
+
+Store structured data in `_data/` as YAML files:
+
+```yaml
+# _data/navigation.yml
+main:
+  - title: "Головна"
+    url: /
+  - title: "Продукти"
+    url: /products.html
+```
+
+Access: `site.data.navigation.main`
+
+## Includes
+
+Reusable components in `_includes/`:
+
+```liquid
+{% include header.html %}
+{% include icon.html name="check" class="text-success" %}
+{% include card.html title=product.title image=product.image %}
+```
+
+## Layouts
+
+Layouts inherit with `layout` in front matter:
+
+```html
+<!-- _layouts/page.html -->
+---
+layout: default
+---
+<article class="page">
+  <h1>{{ page.title }}</h1>
+  {{ content }}
+</article>
+```
+
+## Development Commands
+
+```bash
+# Install dependencies
+bundle install
+
+# Start dev server with live reload
+bundle exec jekyll serve --livereload
+
+# Build for production
+JEKYLL_ENV=production bundle exec jekyll build
+
+# Include drafts
+bundle exec jekyll serve --drafts
+
+# Clean cache
+bundle exec jekyll clean
+
+# Diagnostics
+bundle exec jekyll doctor
+```
+
+## Common Tasks
+
+### Create New Page
+1. Create file at root: `page-name.md` or `page-name.html`
+2. Add front matter with layout, title, description
+3. Add to navigation in `_data/navigation.yml`
+
+### Create New Product
+1. Create file in `_products/`: `product-name.md`
+2. Use required front matter fields
+3. Add product image to `assets/images/products/`
+
+### Modify Navigation
+Edit `_data/navigation.yml` and use in templates with `site.data.navigation`

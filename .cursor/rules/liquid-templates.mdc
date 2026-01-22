@@ -1,0 +1,193 @@
+---
+description: Liquid templating language reference for Jekyll
+globs: ["*.html", "_includes/**", "_layouts/**"]
+---
+
+# Liquid Templating Reference
+
+## Basic Syntax
+
+### Output (render values)
+```liquid
+{{ page.title }}
+{{ site.title }}
+{{ content }}
+{{ product.price | default: "Contact us" }}
+```
+
+### Tags (logic)
+```liquid
+{% if condition %}...{% endif %}
+{% for item in collection %}...{% endfor %}
+{% include component.html %}
+{% assign variable = value %}
+```
+
+## Conditionals
+
+```liquid
+{% if page.featured %}
+  <span class="badge">Рекомендовано</span>
+{% elsif page.new %}
+  <span class="badge">Новинка</span>
+{% else %}
+  <span class="badge">Стандарт</span>
+{% endif %}
+
+{% unless page.hidden %}
+  <!-- Show content -->
+{% endunless %}
+
+{% case page.category %}
+  {% when "software" %}
+    Software category
+  {% when "hardware" %}
+    Hardware category
+  {% else %}
+    Default
+{% endcase %}
+```
+
+## Loops
+
+```liquid
+{% for product in site.products limit:6 %}
+  {% if forloop.first %}<div class="featured">{% endif %}
+  
+  <div class="product">
+    {{ product.title }}
+    <!-- forloop.index (1-based), forloop.index0 (0-based) -->
+    <!-- forloop.first, forloop.last, forloop.length -->
+  </div>
+  
+  {% if forloop.last %}</div>{% endif %}
+{% endfor %}
+```
+
+## Filters
+
+### URL Filters
+```liquid
+{{ "/page" | relative_url }}      → /baseurl/page
+{{ "/page" | absolute_url }}      → https://site.com/page
+{{ page.url | prepend: site.url }}
+```
+
+### String Filters
+```liquid
+{{ "text" | upcase }}             → TEXT
+{{ "TEXT" | downcase }}           → text
+{{ "text" | capitalize }}         → Text
+{{ "Page Title" | slugify }}      → page-title
+{{ content | truncate: 100 }}     → First 100 chars...
+{{ content | strip_html }}        → Remove HTML tags
+{{ text | escape }}               → HTML escape
+```
+
+### Array Filters
+```liquid
+{{ site.products | where: "featured", true }}
+{{ site.products | where_exp: "p", "p.price_value > 1000" }}
+{{ site.products | sort: "order" }}
+{{ site.products | reverse }}
+{{ site.products | first }}
+{{ site.products | last }}
+{{ site.products | size }}
+{{ array | join: ", " }}
+{{ array | uniq }}
+{{ array | concat: other_array }}
+```
+
+### Date Filters
+```liquid
+{{ page.date | date: "%d.%m.%Y" }}        → 22.01.2026
+{{ page.date | date: "%B %d, %Y" }}       → January 22, 2026
+{{ site.time | date: "%Y-%m-%d %H:%M" }}  → Build timestamp
+```
+
+### Content Filters
+```liquid
+{{ page.content | markdownify }}          → Markdown to HTML
+{{ page.excerpt | strip_html | truncate: 160 }}
+{{ content | number_of_words }}
+```
+
+## Variables
+
+### Assign
+```liquid
+{% assign featured = site.products | where: "featured", true %}
+{% assign count = site.products | size %}
+```
+
+### Capture (multiline)
+```liquid
+{% capture product_list %}
+  {% for p in site.products %}
+    {{ p.title }}{% unless forloop.last %}, {% endunless %}
+  {% endfor %}
+{% endcapture %}
+{{ product_list | strip }}
+```
+
+## Include with Parameters
+
+```liquid
+{% include card.html 
+   title=product.title 
+   image=product.image 
+   url=product.url 
+   class="featured"
+%}
+```
+
+In include file, access via `include.param`:
+
+```html
+<!-- _includes/card.html -->
+<div class="card {{ include.class }}">
+  <img src="{{ include.image }}" alt="{{ include.title }}">
+  <h3>{{ include.title }}</h3>
+  <a href="{{ include.url }}">Детальніше</a>
+</div>
+```
+
+## Environment Check
+
+```liquid
+{% if jekyll.environment == "production" %}
+  <!-- Analytics, minified assets -->
+{% endif %}
+```
+
+## Common Patterns
+
+### Navigation with Active State
+```liquid
+{% for item in site.data.navigation.main %}
+  <a href="{{ item.url }}" 
+     {% if page.url == item.url %}class="active"{% endif %}>
+    {{ item.title }}
+  </a>
+{% endfor %}
+```
+
+### Conditional Default Image
+```liquid
+{% if product.image %}
+  <img src="{{ product.image }}" alt="{{ product.title }}">
+{% else %}
+  <img src="/assets/images/default-product.png" alt="Product">
+{% endif %}
+```
+
+### Group by Category
+```liquid
+{% assign grouped = site.products | group_by: "category" %}
+{% for group in grouped %}
+  <h2>{{ group.name }}</h2>
+  {% for product in group.items %}
+    {{ product.title }}
+  {% endfor %}
+{% endfor %}
+```

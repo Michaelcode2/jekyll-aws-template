@@ -1,0 +1,258 @@
+---
+description: SCSS/Sass styling patterns and organization
+globs: ["_sass/**/*.scss", "assets/css/**/*.scss"]
+---
+
+# SCSS Styling Guide
+
+## File Organization
+
+```
+_sass/
+├── _variables.scss    # Colors, fonts, spacing, breakpoints
+├── _base.scss         # Reset, typography, base elements
+├── _components.scss   # Buttons, forms, cards, badges
+├── _header.scss       # Site header and navigation
+├── _footer.scss       # Site footer
+├── _hero.scss         # Hero/banner sections
+├── _sections.scss     # Homepage sections
+├── _pages.scss        # Page-specific styles
+└── _product.scss      # Product pages
+
+assets/css/
+└── main.scss          # Entry point (imports all partials)
+```
+
+## Main Entry Point
+
+```scss
+// assets/css/main.scss
+---
+# Front matter required for Jekyll processing
+---
+
+@import "variables";
+@import "base";
+@import "components";
+@import "header";
+@import "footer";
+@import "hero";
+@import "sections";
+@import "pages";
+@import "product";
+```
+
+## Variables (_variables.scss)
+
+```scss
+// Colors
+$color-primary: #2563eb;
+$color-primary-dark: #1d4ed8;
+$color-secondary: #64748b;
+$color-success: #22c55e;
+$color-warning: #f59e0b;
+$color-danger: #ef4444;
+
+$color-text: #1e293b;
+$color-text-light: #64748b;
+$color-background: #ffffff;
+$color-surface: #f8fafc;
+$color-border: #e2e8f0;
+
+// Typography
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-family-heading: 'Montserrat', sans-serif;
+
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 2rem;
+
+$line-height-base: 1.6;
+$line-height-heading: 1.2;
+
+// Spacing
+$spacing-unit: 8px;
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+
+// Layout
+$max-width: 1200px;
+$max-width-content: 800px;
+$border-radius: 8px;
+$border-radius-lg: 12px;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Shadows
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+// Transitions
+$transition-fast: 150ms ease;
+$transition-base: 300ms ease;
+```
+
+## Responsive Mixins
+
+```scss
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+}
+
+// Usage
+.container {
+  padding: $spacing-md;
+  
+  @include respond-to(md) {
+    padding: $spacing-lg;
+  }
+  
+  @include respond-to(lg) {
+    padding: $spacing-xl;
+  }
+}
+```
+
+## BEM Naming Convention
+
+```scss
+// Block
+.card { }
+
+// Element (part of block)
+.card__title { }
+.card__image { }
+.card__content { }
+
+// Modifier (variation)
+.card--featured { }
+.card--horizontal { }
+
+// Example
+.product-card {
+  border-radius: $border-radius;
+  box-shadow: $shadow-md;
+  
+  &__image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+  }
+  
+  &__price {
+    color: $color-primary;
+    font-weight: 700;
+  }
+  
+  &--featured {
+    border: 2px solid $color-primary;
+  }
+}
+```
+
+## Common Components
+
+### Buttons
+```scss
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius;
+  font-weight: 600;
+  transition: all $transition-fast;
+  cursor: pointer;
+  
+  &--primary {
+    background: $color-primary;
+    color: white;
+    
+    &:hover {
+      background: $color-primary-dark;
+    }
+  }
+  
+  &--secondary {
+    background: transparent;
+    border: 2px solid $color-primary;
+    color: $color-primary;
+  }
+}
+```
+
+### Container
+```scss
+.container {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+  
+  @include respond-to(lg) {
+    padding: 0 $spacing-xl;
+  }
+}
+```
+
+## Image Optimization in CSS
+
+```scss
+// Responsive images
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Lazy loading placeholder
+.lazy-image {
+  background: $color-surface;
+  
+  &[data-loaded="true"] {
+    background: transparent;
+  }
+}
+```
+
+## Print Styles
+
+```scss
+@media print {
+  .no-print,
+  .header,
+  .footer,
+  .sidebar {
+    display: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    color: black;
+  }
+}
+```

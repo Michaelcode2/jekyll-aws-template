@@ -1,0 +1,67 @@
+---
+description: Project overview and core requirements - always apply
+alwaysApply: true
+---
+
+# Rules for Jekyll Project
+
+## Project Overview
+- **Framework**: Jekyll static site generator
+- **Language**: Ukrainian (all content, UI text)
+- **Style**: Business/Professional
+- **Purpose**: Software products advertisement and promotion
+- **Repository**: GitHub
+- **Deployment**: AWS S3 + CloudFront CDN with SSL
+- **CI/CD**: GitHub Actions workflows
+- **Environments**: Development (dev) and Production (prod)
+
+## Language Requirements
+- Code comments in English
+- Variable/function names in English (standard practice)
+
+## Project Structure
+
+```
+├── _config.yml          # Site configuration
+├── _config_dev.yml      # Dev environment overrides
+├── _data/               # Data files (navigation, features, etc.)
+├── _includes/           # Reusable components
+├── _layouts/            # Page templates
+├── _products/           # Product collection
+├── _sass/               # SCSS partials
+├── assets/              # Static files (CSS, JS, images)
+├── .github/workflows/   # CI/CD configuration
+└── docs/                # Documentation
+```
+
+## Business Style Guidelines
+- Professional, clean, modern design
+- Focus on clarity and conversion
+- Responsive design (mobile-first approach)
+- Fast loading times (optimize images, minify assets)
+- Accessible design (WCAG 2.1 AA compliance)
+- Clear call-to-action buttons
+- Professional typography
+
+## Code Style
+- Semantic HTML5
+- BEM methodology for CSS class naming
+- SCSS/Sass for stylesheets
+- Vanilla JS (minimal, modular)
+- Consistent indentation: 2 spaces (YAML), 2-4 spaces (HTML/CSS/JS)
+
+## File Organization
+- Keep configuration files at root level
+- Organize assets logically (images, CSS, JS)
+- Use includes for reusable components
+- Separate concerns (layout, content, styling)
+- Document custom configurations
+
+## Security & Performance
+- Use environment variables for sensitive data
+- Optimize images (WebP format where possible)
+- Minify CSS and JavaScript in production
+- Enable CloudFront compression
+- Use HTTPS everywhere (SSL/TLS)
+- Implement proper caching headers
+
