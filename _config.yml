@@ -65,6 +65,12 @@ defaults:
       type: "products"
     values:
       layout: "product"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      permalink: /blog/:year/:month/:day/:title/
 
 # Plugins
 plugins:

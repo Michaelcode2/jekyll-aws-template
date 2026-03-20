@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumbs">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <span class="separator">/</span>
+      <span class="current">{{ page.title }}</span>
+    </nav>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="page-subtitle">{{ page.subtitle }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    {% if site.posts.size > 0 %}
+    <div class="blog-list">
+      {% for post in site.posts %}
+      <article class="post-card">
+        <a href="{{ post.url | relative_url }}" class="post-card__link">
+          {% if post.image %}
+          <div class="post-card__image">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+          </div>
+          {% endif %}
+          <div class="post-card__body">
+            <time class="post-card__date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%d.%m.%Y" }}</time>
+            <h2 class="post-card__title">{{ post.title }}</h2>
+            <p class="post-card__excerpt">{{ post.excerpt | default: post.description | strip_html | truncate: 160 }}</p>
+            <span class="post-card__cta btn btn-outline">Read more</span>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="blog-list__empty">No publications yet. Come back soon.</p>
+    {% endif %}
+  </div>
+</section>

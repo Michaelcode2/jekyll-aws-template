@@ -1,0 +1,26 @@
+{%- comment -%}
+  Embed a YouTube video. Pass either id="VIDEO_ID" or url="https://www.youtube.com/watch?v=VIDEO_ID"
+{%- endcomment -%}
+{%- assign video_id = include.id -%}
+{%- if include.url -%}
+  {%- assign url = include.url | strip -%}
+  {%- if url contains "youtube.com/watch?v=" -%}
+    {%- assign video_id = url | split: "v=" | last | split: "&" | first -%}
+  {%- elsif url contains "youtu.be/" -%}
+    {%- assign video_id = url | split: "youtu.be/" | last | split: "?" | first -%}
+  {%- elsif url contains "youtube.com/embed/" -%}
+    {%- assign video_id = url | split: "embed/" | last | split: "?" | first -%}
+  {%- endif -%}
+{%- endif -%}
+{%- if video_id and video_id.size > 5 -%}
+<div class="youtube-embed">
+  <iframe
+    src="https://www.youtube.com/embed/{{ video_id }}"
+    title="YouTube video"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    loading="lazy"
+  ></iframe>
+</div>
+{%- endif -%}

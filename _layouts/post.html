@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+<section class="page-hero page-hero--product">
+  <div class="container">
+    <nav class="breadcrumbs">
+      <a href="{{ '/' | relative_url }}">Головна</a>
+      <span class="separator">/</span>
+      <a href="{{ '/blog/' | relative_url }}">Блог</a>
+      <span class="separator">/</span>
+      <span class="current">{{ page.title }}</span>
+    </nav>
+    <h1 class="page-title">{{ page.title }}</h1>
+    <p class="post-meta post-meta--hero">{{ page.date | date: "%d.%m.%Y" }}</p>
+  </div>
+</section>
+
+<section class="page-content post-content">
+  <div class="container container--narrow">
+    {% if page.image %}
+    <div class="post-featured-image">
+      <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" loading="eager">
+    </div>
+    {% endif %}
+
+    <article class="post-article">
+      {{ content }}
+    </article>
+
+    {% if page.youtube %}
+    <div class="post-videos">
+      <h2 class="post-videos__title">Відео</h2>
+      <div class="post-videos__list">
+        {% assign yt = page.youtube %}
+        {% if yt.first.size > 10 or yt.first contains "http" %}
+          {% for url in yt %}
+          <div class="youtube-embed-wrapper">
+            {% include youtube.html url=url %}
+          </div>
+          {% endfor %}
+        {% else %}
+        <div class="youtube-embed-wrapper">
+          {% include youtube.html url=page.youtube %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
